@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Register | My Task Manager{% endblock %}
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="brand-large"><span class="brand-mark">✓</span></div>
+        <h1>Create your account</h1>
+        <p class="text-muted mb-4">Start organizing your day in one place.</p>
+        <form method="post">
+            <label class="form-label">Full name</label>
+            <input class="form-control form-control-lg mb-3" type="text" name="name" placeholder="Your name" required>
+
+            <label class="form-label">Email address</label>
+            <input class="form-control form-control-lg mb-3" type="email" name="email" placeholder="you@example.com" required>
+
+            <label class="form-label">Password</label>
+            <input class="form-control form-control-lg mb-3" type="password" name="password" placeholder="Minimum 6 characters" required>
+
+            <label class="form-label">Confirm password</label>
+            <input class="form-control form-control-lg mb-4" type="password" name="confirm_password" placeholder="Repeat password" required>
+
+            <button class="btn btn-primary btn-lg w-100">Create Account</button>
+        </form>
+        <p class="text-center mt-4 mb-0 text-muted">
+            Already have an account?
+            <a href="{{ url_for('login') }}" class="fw-semibold text-decoration-none">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

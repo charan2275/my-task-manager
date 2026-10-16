@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Profile | My Task Manager{% endblock %}
+{% block content %}
+<div class="form-page">
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to dashboard</a>
+    <div class="profile-card card border-0 mt-4">
+        <div class="profile-avatar">{{ user.name[0].upper() }}</div>
+        <h1>{{ user.name }}</h1>
+        <p class="text-muted">{{ user.email }}</p>
+        <div class="profile-info">
+            <span>Account created</span>
+            <strong>{{ user.created_at.strftime("%d %B %Y") }}</strong>
+        </div>
+    </div>
+</div>
+{% endblock %}

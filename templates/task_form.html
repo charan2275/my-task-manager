@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} | My Task Manager{% endblock %}
+{% block content %}
+<div class="form-page">
+    <div class="mb-4">
+        <a href="{{ url_for('dashboard') }}" class="back-link">← Back to dashboard</a>
+        <p class="eyebrow mt-4">TASK MANAGEMENT</p>
+        <h1 class="page-title">{{ page_title }}</h1>
+        <p class="text-muted">Add the details below to keep your task organized.</p>
+    </div>
+
+    <div class="card form-card border-0">
+        <div class="card-body p-4 p-md-5">
+            <form method="post">
+                <div class="mb-4">
+                    <label class="form-label">Task name *</label>
+                    <input class="form-control form-control-lg" name="title" maxlength="150"
+                           value="{{ task.title if task else '' }}" placeholder="e.g. Complete DSA assignment" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Task description</label>
+                    <textarea class="form-control" name="description" rows="5"
+                              placeholder="Add notes or details about this task...">{{ task.description if task else '' }}</textarea>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label">Completion date *</label>
+                        <input class="form-control form-control-lg" type="date" name="due_date"
+                               value="{{ task.due_date.isoformat() if task else '' }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Completion time *</label>
+                        <input class="form-control form-control-lg" type="time" name="due_time"
+                               value="{{ task.due_time.strftime('%H:%M') if task and task.due_time else '23:59' }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Status</label>
+                        <select class="form-select form-select-lg" name="status">
+                            <option value="Pending" {% if not task or task.status == "Pending" %}selected{% endif %}>Pending</option>
+                            <option value="Completed" {% if task and task.status == "Completed" %}selected{% endif %}>Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-end">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-light border px-4">Cancel</a>
+                    <button class="btn btn-primary px-4">{{ "Save Changes" if task else "Add Task" }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
